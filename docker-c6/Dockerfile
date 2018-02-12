@@ -20,7 +20,7 @@ RUN yum -y install http://repository.egi.eu/sw/production/umd/3/sl6/x86_64/updat
 RUN yum -y install freetype expat gcc glibc-headers compat-expat1 compat-openldap time man unzip quota attr
 
 # Install HEP_OSlibs
-RUN yum -y install http://linuxsoft.cern.ch/wlcg/sl6/x86_64/HEP_OSlibs_SL6-1.1.2-1.el6.x86_64.rpm
+RUN yum -y install http://linuxsoft.cern.ch/wlcg/sl6/x86_64/HEP_OSlibs_SL6-1.1.4-1.el6.x86_64.rpm
 
 # Install glexec, lcmaps & lcas
 RUN yum -y install glexec mkgltempdir \
