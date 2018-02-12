@@ -11,10 +11,10 @@ RUN yum -y install https://ecsft.cern.ch/dist/cvmfs/cvmfs-release/cvmfs-release-
 RUN yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 
 # Basic dependencies
-RUN yum -y install freetype expat gcc glibc-headers compat-expat1 compat-openldap time man unzip quota attr
+RUN yum -y install freetype expat gcc glibc-headers compat-expat1 compat-openldap time man unzip quota attr tcsh
 
 # Install HEP_OSlibs
-RUN yum -y install http://linuxsoft.cern.ch/wlcg/centos7/x86_64/HEP_OSlibs-7.2.3-1.el7.cern.x86_64.rpm
+RUN yum -y install http://linuxsoft.cern.ch/wlcg/centos7/x86_64/HEP_OSlibs-7.2.5-1.el7.cern.x86_64.rpm
 
 # Machine job features
 RUN yum -y install wget
