@@ -41,6 +41,7 @@ RUN yum -y install boost-date-time boost-filesystem boost-graph boost-iostreams 
 # Singularity
 RUN yum -y install http://linuxsoft.cern.ch/wlcg/sl6/x86_64/singularity-2.4.2-1.osg34.el6.x86_64.rpm \
                    http://linuxsoft.cern.ch/wlcg/sl6/x86_64/singularity-runtime-2.4.2-1.osg34.el6.x86_64.rpm
+RUN sed -i '/enable overlay/c\enable overlay = no' /etc/singularity/singularity.conf
 
 # Update & cleanup
 RUN yum -y update && \
