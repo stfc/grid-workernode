@@ -28,8 +28,9 @@ RUN yum -y install boost-date-time boost-filesystem boost-graph boost-iostreams 
                    boost-thread boost-wave
 
 # Singularity
-RUN yum -y install http://linuxsoft.cern.ch/wlcg/centos7/x86_64/singularity-2.5.0-1.1.osg34.el7.x86_64.rpm \
-                   http://linuxsoft.cern.ch/wlcg/centos7/x86_64/singularity-runtime-2.5.0-1.1.osg34.el7.x86_64.rpm
+RUN yum -y install https://anorien.csc.warwick.ac.uk/mirrors/epel/7/x86_64/Packages/s/singularity-2.5.1-1.el7.x86_64.rpm \
+                   https://anorien.csc.warwick.ac.uk/mirrors/epel/7/x86_64/Packages/s/singularity-runtime-2.5.1-1.el7.x86_64.rpm
+
 RUN sed -i '/enable overlay/c\enable overlay = no' /etc/singularity/singularity.conf
 
 # Update & cleanup
