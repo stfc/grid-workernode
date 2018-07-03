@@ -39,8 +39,8 @@ RUN yum -y install boost-date-time boost-filesystem boost-graph boost-iostreams 
                    boost-thread boost-wave
                    
 # Singularity
-RUN yum -y install http://linuxsoft.cern.ch/wlcg/sl6/x86_64/singularity-2.5.0-1.1.osg34.el6.x86_64.rpm \
-                   http://linuxsoft.cern.ch/wlcg/sl6/x86_64/singularity-runtime-2.5.0-1.1.osg34.el6.x86_64.rpm
+RUN yum -y install http://mirrors.gridpp.rl.ac.uk/current/epel-7-x86_64/RPMS.base/singularity-2.5.1-1.el7.x86_64.rpm \
+                   http://mirrors.gridpp.rl.ac.uk/current/epel-7-x86_64/RPMS.base/singularity-runtime-2.5.1-1.el7.x86_64.rpm
 RUN sed -i '/enable overlay/c\enable overlay = no' /etc/singularity/singularity.conf
 
 # Update & cleanup
