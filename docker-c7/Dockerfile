@@ -2,6 +2,8 @@ FROM centos:7
 
 RUN yum -y install yum-priorities
 
+RUN yum -y install zip
+
 # CVMFS (for SUM tests only; install before adding other repos to ensure we have the latest version)
 RUN yum -y install https://ecsft.cern.ch/dist/cvmfs/cvmfs-release/cvmfs-release-latest.noarch.rpm \
                    https://ecsft.cern.ch/dist/cvmfs/cvmfs-config-egi/cvmfs-config-egi-2.0-1.el7.centos.noarch.rpm && \
@@ -28,8 +30,8 @@ RUN yum -y install boost-date-time boost-filesystem boost-graph boost-iostreams 
                    boost-thread boost-wave
 
 # Singularity
-RUN yum -y install https://anorien.csc.warwick.ac.uk/mirrors/epel/7/x86_64/Packages/s/singularity-2.5.1-1.el7.x86_64.rpm \
-                   https://anorien.csc.warwick.ac.uk/mirrors/epel/7/x86_64/Packages/s/singularity-runtime-2.5.1-1.el7.x86_64.rpm
+RUN yum -y install https://anorien.csc.warwick.ac.uk/mirrors/epel/7/x86_64/Packages/s/singularity-2.5.2-1.el7.x86_64.rpm \
+                   https://anorien.csc.warwick.ac.uk/mirrors/epel/7/x86_64/Packages/s/singularity-runtime-2.5.2-1.el7.x86_64.rpm
 
 RUN sed -i '/enable overlay/c\enable overlay = no' /etc/singularity/singularity.conf
 
