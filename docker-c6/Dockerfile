@@ -2,6 +2,8 @@ FROM centos:6
 
 RUN yum -y install yum-priorities
 
+RUN yum -y install zip
+
 # CVMFS (for SUM tests only; install before adding other repos to ensure we have the latest version)
 RUN yum -y install https://ecsft.cern.ch/dist/cvmfs/cvmfs-release/cvmfs-release-latest.noarch.rpm \
                    https://ecsft.cern.ch/dist/cvmfs/cvmfs-config-egi/cvmfs-config-egi-2.0-1.el6.noarch.rpm  && \
@@ -39,8 +41,8 @@ RUN yum -y install boost-date-time boost-filesystem boost-graph boost-iostreams 
                    boost-thread boost-wave
                    
 # Singularity
-RUN yum -y install http://mirrors.gridpp.rl.ac.uk/current/epel-6-x86_64/RPMS.base/singularity-2.5.1-1.el6.x86_64.rpm \
-                   http://mirrors.gridpp.rl.ac.uk/current/epel-6-x86_64/RPMS.base/singularity-runtime-2.5.1-1.el6.x86_64.rpm
+RUN yum -y install http://mirrors.gridpp.rl.ac.uk/current/epel-6-x86_64/RPMS.base/singularity-2.5.2-1.el6.x86_64.rpm \
+                   http://mirrors.gridpp.rl.ac.uk/current/epel-6-x86_64/RPMS.base/singularity-runtime-2.5.2-1.el6.x86_64.rpm
 RUN sed -i '/enable overlay/c\enable overlay = no' /etc/singularity/singularity.conf
 
 # Update & cleanup
