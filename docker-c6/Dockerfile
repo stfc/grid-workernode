@@ -9,7 +9,7 @@ RUN yum -y install https://ecsft.cern.ch/dist/cvmfs/cvmfs-release/cvmfs-release-
                    https://ecsft.cern.ch/dist/cvmfs/cvmfs-config-egi/cvmfs-config-egi-2.0-1.el6.noarch.rpm  && \
     yum -y install cvmfs
 
-# Needed for access to secure CVMFS repositories
+# Needed for access to secure CVMFS repositories
 RUN yum -y install https://ecsft.cern.ch/dist/cvmfs/cvmfs-x509-helper/cvmfs-x509-helper-1.0-1.el6.x86_64.rpm
 
 # EPEL
@@ -41,9 +41,12 @@ RUN yum -y install boost-date-time boost-filesystem boost-graph boost-iostreams 
                    boost-thread boost-wave
                    
 # Singularity
-RUN yum -y install http://mirrors.gridpp.rl.ac.uk/current/epel-6-x86_64/RPMS.base/singularity-2.5.2-1.el6.x86_64.rpm \
-                   http://mirrors.gridpp.rl.ac.uk/current/epel-6-x86_64/RPMS.base/singularity-runtime-2.5.2-1.el6.x86_64.rpm
+RUN yum -y install http://mirrors.gridpp.rl.ac.uk/current/epel-6-x86_64/RPMS.base/singularity-2.6.0-1.1.el6.x86_64.rpm \
+                   http://mirrors.gridpp.rl.ac.uk/current/epel-6-x86_64/RPMS.base/singularity-runtime-2.6.0-1.1.el6.x86_64.rpm
+
 RUN sed -i '/enable overlay/c\enable overlay = no' /etc/singularity/singularity.conf
+
+RUN sed -i '/max loop devices/c\max loop devices = 0' /etc/singularity/singularity.conf
 
 # Update & cleanup
 RUN yum -y update && \

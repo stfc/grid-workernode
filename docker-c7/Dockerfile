@@ -30,10 +30,12 @@ RUN yum -y install boost-date-time boost-filesystem boost-graph boost-iostreams 
                    boost-thread boost-wave
 
 # Singularity
-RUN yum -y install https://anorien.csc.warwick.ac.uk/mirrors/epel/7/x86_64/Packages/s/singularity-2.5.2-1.el7.x86_64.rpm \
-                   https://anorien.csc.warwick.ac.uk/mirrors/epel/7/x86_64/Packages/s/singularity-runtime-2.5.2-1.el7.x86_64.rpm
+RUN yum -y install https://anorien.csc.warwick.ac.uk/mirrors/epel/7/x86_64/Packages/s/singularity-2.6.0-1.1.el7.x86_64.rpm \
+                   https://anorien.csc.warwick.ac.uk/mirrors/epel/7/x86_64/Packages/s/singularity-runtime-2.6.0-1.1.el7.x86_64.rpm
 
 RUN sed -i '/enable overlay/c\enable overlay = no' /etc/singularity/singularity.conf
+
+RUN sed -i '/max loop devices/c\max loop devices = 0' /etc/singularity/singularity.conf
 
 # Update & cleanup
 RUN yum -y update && \
