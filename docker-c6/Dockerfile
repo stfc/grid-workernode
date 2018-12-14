@@ -39,10 +39,10 @@ RUN wget --no-check-certificate https://repo.gridpp.ac.uk/machinejobfeatures/mjf
 RUN yum -y install boost-date-time boost-filesystem boost-graph boost-iostreams boost-program-options \
                    boost-python boost-regex boost-serialization boost-signals boost-system boost-test \
                    boost-thread boost-wave
-                   
+
 # Singularity
-RUN yum -y install http://mirrors.gridpp.rl.ac.uk/current/epel-6-x86_64/RPMS.base/singularity-2.6.0-1.1.el6.x86_64.rpm \
-                   http://mirrors.gridpp.rl.ac.uk/current/epel-6-x86_64/RPMS.base/singularity-runtime-2.6.0-1.1.el6.x86_64.rpm
+RUN yum -y install http://mirrors.gridpp.rl.ac.uk/current/epel-6-x86_64/RPMS.base/singularity-2.6.1-1.1.el6.x86_64.rpm \
+                   http://mirrors.gridpp.rl.ac.uk/current/epel-6-x86_64/RPMS.base/singularity-runtime-2.6.1-1.1.el6.x86_64.rpm
 
 RUN sed -i '/enable overlay/c\enable overlay = no' /etc/singularity/singularity.conf
 
