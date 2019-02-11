@@ -19,10 +19,7 @@ RUN yum -y install freetype expat gcc glibc-headers compat-expat1 compat-openlda
 RUN yum -y install http://linuxsoft.cern.ch/wlcg/centos7/x86_64/HEP_OSlibs-7.2.6-1.el7.cern.x86_64.rpm
 
 # Machine job features
-RUN yum -y install wget
-RUN wget --no-check-certificate https://repo.gridpp.ac.uk/machinejobfeatures/mjf-scripts/00/RPMS/mjf-htcondor-00.14-1.noarch.rpm && \
-    yum -y localinstall mjf-htcondor-00.14-1.noarch.rpm && \
-    rm -f mjf-htcondor-00.14-1.noarch.rpm
+RUN yum -y install http://quattor.web.lal.in2p3.fr/packages/machine-job-features/sl6/noarch/mjf-htcondor-00.19-1.noarch.rpm
 
 # Boost (need to ensure gfal CLI from CVMFS will work for some VOs)
 RUN yum -y install boost-date-time boost-filesystem boost-graph boost-iostreams boost-program-options \
