@@ -39,4 +39,5 @@ RUN sed -i '/max loop devices/c\max loop devices = 0' /etc/singularity/singulari
 
 # Update & cleanup
 RUN yum -y update && \
-    yum clean all
+    yum clean all && \
+    rm -rf /var/cache/yum
