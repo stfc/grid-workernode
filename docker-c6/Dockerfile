@@ -5,12 +5,11 @@ RUN yum -y install yum-priorities
 RUN yum -y install zip
 
 # CVMFS (for SUM tests only; install before adding other repos to ensure we have the latest version)
+# Install cvmfs-x509-helper for access to secure CVMFS repositories
 RUN yum -y install https://ecsft.cern.ch/dist/cvmfs/cvmfs-release/cvmfs-release-latest.noarch.rpm \
                    https://ecsft.cern.ch/dist/cvmfs/cvmfs-config-egi/cvmfs-config-egi-2.0-1.el6.noarch.rpm  && \
-    yum -y install cvmfs
-
-# Needed for access to secure CVMFS repositories
-RUN yum -y install https://ecsft.cern.ch/dist/cvmfs/cvmfs-x509-helper/cvmfs-x509-helper-1.0-1.el6.x86_64.rpm
+    yum -y install cvmfs && \
+    yum -y install https://ecsft.cern.ch/dist/cvmfs/cvmfs-x509-helper/cvmfs-x509-helper-1.0-1.el6.x86_64.rpm
 
 # EPEL
 RUN yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
@@ -19,7 +18,7 @@ RUN yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.n
 RUN yum -y install http://repository.egi.eu/sw/production/umd/4/sl6/x86_64/updates/umd-release-4.1.3-1.el6.noarch.rpm
 
 # Basic dependencies
-RUN yum -y install freetype expat gcc glibc-headers compat-expat1 compat-openldap time man unzip quota attr
+RUN yum -y install freetype expat gcc glibc-headers compat-expat1 compat-openldap time man unzip quota attr tcsh
 
 # Install HEP_OSlibs
 RUN yum -y install http://linuxsoft.cern.ch/wlcg/sl6/x86_64/HEP_OSlibs_SL6-1.1.5-1.el6.x86_64.rpm
@@ -41,6 +40,7 @@ RUN yum -y install boost-date-time boost-filesystem boost-graph boost-iostreams 
 RUN yum -y install singularity-2.6.1-1.1.el6.x86_64 \
                    singularity-runtime-2.6.1-1.1.el6.x86_64
 
+# Disable overlay and loop device management in singularity
 RUN sed -i '/enable overlay/c\enable overlay = no' /etc/singularity/singularity.conf
 
 RUN sed -i '/max loop devices/c\max loop devices = 0' /etc/singularity/singularity.conf
