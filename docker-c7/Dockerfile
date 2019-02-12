@@ -30,6 +30,7 @@ RUN yum -y install boost-date-time boost-filesystem boost-graph boost-iostreams 
 RUN yum -y install singularity-2.6.1-1.1.el7.x86_64 \
                    singularity-runtime-2.6.1-1.1.el7.x86_64
 
+# Disable overlay and loop device management in singularity
 RUN sed -i '/enable overlay/c\enable overlay = no' /etc/singularity/singularity.conf
 
 RUN sed -i '/max loop devices/c\max loop devices = 0' /etc/singularity/singularity.conf
