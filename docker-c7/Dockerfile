@@ -7,7 +7,7 @@ RUN yum -y install zip
 # CVMFS (for SUM tests only; install before adding other repos to ensure we have the latest version)
 RUN yum -y install https://ecsft.cern.ch/dist/cvmfs/cvmfs-release/cvmfs-release-latest.noarch.rpm \
                    https://ecsft.cern.ch/dist/cvmfs/cvmfs-config-egi/cvmfs-config-egi-2.0-1.el7.centos.noarch.rpm && \
-    yum -y install cvmfs
+    yum -y install cvmfs-2.5.2-1.el7.x86_64
 
 # EPEL
 RUN yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
