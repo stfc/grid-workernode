@@ -5,12 +5,11 @@ RUN yum -y install yum-priorities
 RUN yum -y install zip
 
 # CVMFS (for SUM tests only; install before adding other repos to ensure we have the latest version)
+# Install cvmfs-x509-helper for access to secure CVMFS repositories
 RUN yum -y install https://ecsft.cern.ch/dist/cvmfs/cvmfs-release/cvmfs-release-latest.noarch.rpm \
                    https://ecsft.cern.ch/dist/cvmfs/cvmfs-config-egi/cvmfs-config-egi-2.0-1.el6.noarch.rpm  && \
-    yum -y install cvmfs
-
-# Needed for access to secure CVMFS repositories
-RUN yum -y install https://ecsft.cern.ch/dist/cvmfs/cvmfs-x509-helper/cvmfs-x509-helper-1.0-1.el6.x86_64.rpm
+    yum -y install cvmfs && \
+    yum -y install https://ecsft.cern.ch/dist/cvmfs/cvmfs-x509-helper/cvmfs-x509-helper-1.0-1.el6.x86_64.rpm
 
 # EPEL
 RUN yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
