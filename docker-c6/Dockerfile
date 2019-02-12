@@ -18,7 +18,7 @@ RUN yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.n
 RUN yum -y install http://repository.egi.eu/sw/production/umd/4/sl6/x86_64/updates/umd-release-4.1.3-1.el6.noarch.rpm
 
 # Basic dependencies
-RUN yum -y install freetype expat gcc glibc-headers compat-expat1 compat-openldap time man unzip quota attr
+RUN yum -y install freetype expat gcc glibc-headers compat-expat1 compat-openldap time man unzip quota attr tcsh
 
 # Install HEP_OSlibs
 RUN yum -y install http://linuxsoft.cern.ch/wlcg/sl6/x86_64/HEP_OSlibs_SL6-1.1.5-1.el6.x86_64.rpm
