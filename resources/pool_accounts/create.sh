@@ -1,6 +1,6 @@
 #!/bin/bash
 
-URL_RESOURCES="https://raw.githubusercontent.com/stfc/grid-workernode/pool_accounts/resources/pool_accounts"
+URL_RESOURCES="https://raw.githubusercontent.com/stfc/grid-workernode/master/resources/pool_accounts"
 URL_GROUPS="$URL_RESOURCES/groups.tsv"
 URL_USERS="$URL_RESOURCES/users.tsv"
 
