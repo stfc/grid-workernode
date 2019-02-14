@@ -1,33 +1,39 @@
 FROM centos:7
 
-RUN yum -y install yum-priorities
+# If installing multiple packages yum will return success if at least one package installs.
+# We don't want this, so we provide a wrapper to fail if *any* of the packages fail to install.
+RUN echo -e '#!/bin/bash\nfor p in "$@"; do\nyum -y install "$p" || exit 1; done' > /usr/local/sbin/yummy && \
+    chmod u+x /usr/local/sbin/yummy && \
+    cat /usr/local/sbin/yummy
 
-RUN yum -y install zip
+RUN yummy yum-priorities
+
+RUN yummy zip
 
 # CVMFS (for SUM tests only; install before adding other repos to ensure we have the latest version)
-RUN yum -y install https://ecsft.cern.ch/dist/cvmfs/cvmfs-release/cvmfs-release-latest.noarch.rpm \
+RUN yummy https://ecsft.cern.ch/dist/cvmfs/cvmfs-release/cvmfs-release-latest.noarch.rpm \
                    https://ecsft.cern.ch/dist/cvmfs/cvmfs-config-egi/cvmfs-config-egi-2.0-1.el7.centos.noarch.rpm && \
-    yum -y install cvmfs-2.5.2-1.el7.x86_64
+    yummy cvmfs-2.5.2-1.el7.x86_64
 
 # EPEL
-RUN yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+RUN yummy https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 
 # Basic dependencies
-RUN yum -y install freetype expat gcc glibc-headers compat-expat1 compat-openldap time man unzip quota attr tcsh
+RUN yummy freetype expat gcc glibc-headers compat-openldap time man unzip quota attr tcsh
 
 # Install HEP_OSlibs
-RUN yum -y install http://linuxsoft.cern.ch/wlcg/centos7/x86_64/HEP_OSlibs-7.2.6-1.el7.cern.x86_64.rpm
+RUN yummy http://linuxsoft.cern.ch/wlcg/centos7/x86_64/HEP_OSlibs-7.2.6-1.el7.cern.x86_64.rpm
 
 # Machine job features
-RUN yum -y install http://quattor.web.lal.in2p3.fr/packages/machine-job-features/sl6/noarch/mjf-htcondor-00.19-1.noarch.rpm
+RUN yummy http://quattor.web.lal.in2p3.fr/packages/machine-job-features/sl6/noarch/mjf-htcondor-00.19-1.noarch.rpm
 
 # Boost (need to ensure gfal CLI from CVMFS will work for some VOs)
-RUN yum -y install boost-date-time boost-filesystem boost-graph boost-iostreams boost-program-options \
+RUN yummy boost-date-time boost-filesystem boost-graph boost-iostreams boost-program-options \
                    boost-python boost-regex boost-serialization boost-signals boost-system boost-test \
                    boost-thread boost-wave
 
 # Singularity
-RUN yum -y install singularity-2.6.1-1.1.el7.x86_64 \
+RUN yummy singularity-2.6.1-1.1.el7.x86_64 \
                    singularity-runtime-2.6.1-1.1.el7.x86_64
 
 # Disable overlay and loop device management in singularity
