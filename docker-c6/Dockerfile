@@ -8,7 +8,10 @@ RUN echo -e '#!/bin/bash\nfor p in "$@"; do\nyum -y install "$p" || exit 1; done
 
 RUN yummy yum-priorities
 
-RUN yummy zip
+RUN yummy zip curl
+
+# Create all possible pool accounts
+RUN curl -s https://raw.githubusercontent.com/stfc/grid-workernode/master/resources/pool_accounts/create.sh | bash -
 
 # CVMFS (for SUM tests only; install before adding other repos to ensure we have the latest version)
 # Install cvmfs-x509-helper for access to secure CVMFS repositories
