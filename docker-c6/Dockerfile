@@ -50,9 +50,9 @@ RUN yummy singularity-2.6.1-1.1.el6.x86_64 \
                    singularity-runtime-2.6.1-1.1.el6.x86_64
 
 # Disable overlay and loop device management in singularity
-RUN sed -i '/enable overlay/c\enable overlay = no' /etc/singularity/singularity.conf
-
-RUN sed -i '/max loop devices/c\max loop devices = 0' /etc/singularity/singularity.conf
+RUN sed -i '/enable overlay/c\enable overlay = no' /etc/singularity/singularity.conf && \
+    sed -i '/enable underlay/c\enable underlay = yes' /etc/singularity/singularity.conf && \
+    sed -i '/max loop devices/c\max loop devices = 0' /etc/singularity/singularity.conf
 
 # Update & cleanup
 RUN yum -y update && \
