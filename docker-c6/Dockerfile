@@ -30,7 +30,7 @@ RUN yummy http://repository.egi.eu/sw/production/umd/4/sl6/x86_64/updates/umd-re
 RUN yummy freetype expat gcc glibc-headers compat-expat1 compat-openldap time man unzip quota attr tcsh
 
 # Install HEP_OSlibs
-RUN yummy http://linuxsoft.cern.ch/wlcg/sl6/x86_64/HEP_OSlibs_SL6-1.1.5-1.el6.x86_64.rpm
+RUN yummy http://linuxsoft.cern.ch/wlcg/sl6/x86_64/HEP_OSlibs_SL6-1.1.9-2.el6.x86_64.rpm
 
 # Install glexec, lcmaps & lcas
 RUN yummy glexec mkgltempdir \
