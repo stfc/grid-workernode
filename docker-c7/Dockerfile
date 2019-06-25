@@ -6,7 +6,7 @@ RUN echo -e '#!/bin/bash\nfor p in "$@"; do\nyum -y install "$p" || exit 1; done
     chmod u+x /usr/local/sbin/yummy && \
     cat /usr/local/sbin/yummy
 
-RUN yummy yum-priorities
+RUN yummy yum-priorities yum-utils
 
 RUN yummy zip curl
 
@@ -36,8 +36,9 @@ RUN yummy boost-date-time boost-filesystem boost-graph boost-iostreams boost-pro
                    boost-thread boost-wave
 
 # Singularity
-RUN yummy singularity-2.6.1-1.1.el7.x86_64 \
-                   singularity-runtime-2.6.1-1.1.el7.x86_64
+RUN yum-config-manager --setopt 'epel.exclude=singularity*' --save && \
+    yummy https://archive.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/s/singularity-runtime-2.6.1-1.1.el7.x86_64.rpm \
+                   https://archive.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/s/singularity-2.6.1-1.1.el7.x86_64.rpm
 
 # Disable overlay and loop device management in singularity
 RUN sed -i '/enable overlay/c\enable overlay = no' /etc/singularity/singularity.conf && \
