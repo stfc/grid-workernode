@@ -6,7 +6,7 @@ RUN echo -e '#!/bin/bash\nfor p in "$@"; do\nyum -y install "$p" || exit 1; done
     chmod u+x /usr/local/sbin/yummy && \
     cat /usr/local/sbin/yummy
 
-RUN yummy yum-priorities
+RUN yummy yum-priorities yum-utils
 
 RUN yummy zip curl
 
@@ -30,7 +30,7 @@ RUN yummy http://repository.egi.eu/sw/production/umd/4/sl6/x86_64/updates/umd-re
 RUN yummy freetype expat gcc glibc-headers compat-expat1 compat-openldap time man unzip quota attr tcsh
 
 # Install HEP_OSlibs
-RUN yummy http://linuxsoft.cern.ch/wlcg/sl6/x86_64/HEP_OSlibs_SL6-1.1.5-1.el6.x86_64.rpm
+RUN yummy http://linuxsoft.cern.ch/wlcg/sl6/x86_64/HEP_OSlibs_SL6-1.1.9-2.el6.x86_64.rpm
 
 # Install glexec, lcmaps & lcas
 RUN yummy glexec mkgltempdir \
@@ -46,8 +46,9 @@ RUN yummy boost-date-time boost-filesystem boost-graph boost-iostreams boost-pro
                    boost-thread boost-wave
 
 # Singularity
-RUN yummy singularity-2.6.1-1.1.el6.x86_64 \
-                   singularity-runtime-2.6.1-1.1.el6.x86_64
+RUN yum-config-manager --setopt 'epel.exclude=singularity*' --save && \
+    yummy https://archive.fedoraproject.org/pub/archive/epel/6/x86_64/Packages/s/singularity-runtime-2.6.1-1.1.el6.x86_64.rpm \
+                   https://archive.fedoraproject.org/pub/archive/epel/6/x86_64/Packages/s/singularity-2.6.1-1.1.el6.x86_64.rpm
 
 # Disable overlay and loop device management in singularity
 RUN sed -i '/enable overlay/c\enable overlay = no' /etc/singularity/singularity.conf && \
