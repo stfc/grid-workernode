@@ -4,9 +4,7 @@ FROM centos:7
 RUN groupadd --gid 65432 xrootd && useradd --gid xrootd --uid 65432 xrootd
 
 # Repositories
-COPY ceph-el7-x86_64.repo /etc/yum.repos.d/
-COPY epel-7-x86_64.repo /etc/yum.repos.d/
-COPY xrootd-scd-el7-x86_64.repo /etc/yum.repos.d/
+COPY *.repo /etc/yum.repos.d/
 
 # Ceph
 RUN yum -y install ceph-11.2.1-0.el7.x86_64 \

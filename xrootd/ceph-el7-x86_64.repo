@@ -1,0 +1,8 @@
+[ceph-el7-x86_64]
+name = ceph-el7-x86_64
+baseurl = http://mirrors.gridpp.rl.ac.uk/current/ceph-el7-x86_64/RPMS.luminous/
+metadata_expire = 7d
+enabled = 1
+gpgcheck = 0
+priority = 40
+skip_if_unavailable = 0
