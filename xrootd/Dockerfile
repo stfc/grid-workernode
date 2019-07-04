@@ -22,7 +22,7 @@ RUN yum -y install xrootd-ceph \
                    xrootd-server-libs
 
 # For N2N mapping
-RUN yum -y install http://t2.unl.edu/store/osg/3.4/el7/contrib/x86_64/xrootd-cmstfc-1.5.1-11.osg34.el7.x86_64.rpm
+RUN yum -y install http://t2.unl.edu/store/osg/3.4/el7/contrib/x86_64/xrootd-cmstfc-1.5.2-3.osg34.el7.x86_64.rpm
 
 # Needed by the health-check scripts
 RUN yum -y install openssl
