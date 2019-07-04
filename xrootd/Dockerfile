@@ -7,8 +7,8 @@ RUN groupadd --gid 65432 xrootd && useradd --gid xrootd --uid 65432 xrootd
 COPY *.repo /etc/yum.repos.d/
 
 # Ceph
-RUN yum -y install ceph-11.2.1-0.el7.x86_64 \
-                   ceph-common-11.2.1-0.el7.x86_64
+RUN yum -y install ceph-12.2.12-0.el7.x86_64 \
+                   ceph-common-12.2.12-0.el7.x86_64
 
 # Memory allocation
 RUN yum -y install jemalloc
