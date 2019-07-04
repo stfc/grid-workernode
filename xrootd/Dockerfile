@@ -14,12 +14,12 @@ RUN yum -y install ceph-12.2.12-0.el7.x86_64 \
 RUN yum -y install jemalloc
 
 # xrootd
-RUN yum -y install xrootd-ceph-20170724.06470a6-2.el7.x86_64 \
-                   xrootd-client-20170724.06470a6-2.el7.x86_64 \
-                   xrootd-client-libs-20170724.06470a6-2.el7.x86_64 \
-                   xrootd-libs-20170724.06470a6-2.el7.x86_64 \
-                   xrootd-server-20170724.06470a6-2.el7.x86_64 \
-                   xrootd-server-libs-20170724.06470a6-2.el7.x86_64
+RUN yum -y install xrootd-ceph \
+                   xrootd-client \
+                   xrootd-client-libs \
+                   xrootd-libs \
+                   xrootd-server \
+                   xrootd-server-libs
 
 # For N2N mapping
 RUN yum -y install http://t2.unl.edu/store/osg/3.4/el7/contrib/x86_64/xrootd-cmstfc-1.5.1-11.osg34.el7.x86_64.rpm
