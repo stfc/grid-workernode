@@ -10,16 +10,14 @@ COPY *.repo /etc/yum.repos.d/
 RUN yum -y install ceph-12.2.12-0.el7.x86_64 \
                    ceph-common-12.2.12-0.el7.x86_64
 
-# Memory allocation
-RUN yum -y install jemalloc
-
 # xrootd
 RUN yum -y install xrootd-ceph \
                    xrootd-client \
                    xrootd-client-libs \
                    xrootd-libs \
                    xrootd-server \
-                   xrootd-server-libs
+                   xrootd-server-libs \
+                   jemalloc
 
 # For N2N mapping
 RUN yum -y install http://t2.unl.edu/store/osg/3.4/el7/contrib/x86_64/xrootd-cmstfc-1.5.2-3.osg34.el7.x86_64.rpm
