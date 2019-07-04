@@ -1,7 +1,8 @@
 FROM centos:7
 
 # xrootd user - needs to be consistent with the host
-RUN groupadd --gid 65432 xrootd && useradd --gid xrootd --uid 65432 xrootd
+RUN groupadd --gid 65432 xrootd && \
+    useradd --gid xrootd --uid 65432 xrootd
 
 # Repositories
 COPY *.repo /etc/yum.repos.d/
