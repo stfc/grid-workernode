@@ -8,12 +8,21 @@ RUN curl -s https://raw.githubusercontent.com/stfc/grid-workernode/master/resour
 # CVMFS (for SUM tests only; install before adding other repos to ensure we have the latest version)
 RUN dnf -y install https://ecsft.cern.ch/dist/cvmfs/cvmfs-release/cvmfs-release-latest.noarch.rpm \
                    https://download.opensuse.org/repositories/home:/cvmfs:/contrib-egi/CentOS_7/noarch/cvmfs-config-egi-2.4-1.10.obs.el7.noarch.rpm
+#    dnf -y install cvmfs-2.5.2-1.el8.x86_64
 
 # EPEL
 RUN dnf -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
 
 # Basic dependencies
 RUN dnf -y install freetype expat gcc glibc-headers time man unzip quota attr tcsh
+
+# Install HEP_OSlibs
+# Broken python dependencies on CentOS 8
+# RUN dnf -y install http://linuxsoft.cern.ch/wlcg/centos7/x86_64/HEP_OSlibs-7.2.10-1.el7.cern.x86_64.rpm
+
+# Machine job features
+# Broken python dependencies on CentOS 8
+# RUN dnf -y install http://quattor.web.lal.in2p3.fr/packages/machine-job-features/sl6/noarch/mjf-htcondor-00.19-1.noarch.rpm
 
 # Boost (need to ensure gfal CLI from CVMFS will work for some VOs)
 RUN dnf -y install boost-date-time boost-filesystem boost-graph boost-iostreams boost-program-options \
