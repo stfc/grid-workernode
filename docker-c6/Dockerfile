@@ -46,9 +46,7 @@ RUN yummy boost-date-time boost-filesystem boost-graph boost-iostreams boost-pro
                    boost-thread boost-wave
 
 # Singularity
-RUN yum-config-manager --setopt 'epel.exclude=singularity*' --save && \
-    yummy https://archive.fedoraproject.org/pub/archive/epel/6/x86_64/Packages/s/singularity-runtime-2.6.1-1.1.el6.x86_64.rpm \
-                   https://archive.fedoraproject.org/pub/archive/epel/6/x86_64/Packages/s/singularity-2.6.1-1.1.el6.x86_64.rpm
+RUN yummy singularity singularity-runtime
 
 # Disable overlay and loop device management in singularity
 RUN sed -i '/enable overlay/c\enable overlay = no' /etc/singularity/singularity.conf && \
