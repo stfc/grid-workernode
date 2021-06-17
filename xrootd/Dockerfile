@@ -8,8 +8,8 @@ RUN groupadd --gid 65432 xrootd && \
 COPY *.repo /etc/yum.repos.d/
 
 # Ceph
-RUN yum -y install ceph-12.2.12-0.el7.x86_64 \
-                   ceph-common-12.2.12-0.el7.x86_64
+RUN yum -y install ceph-14.2.15-0.el7.x86_64 \
+                   ceph-common-14.2.15-0.el7.x86_64
 
 # xrootd
 RUN yum -y install xrootd-ceph \
@@ -21,7 +21,7 @@ RUN yum -y install xrootd-ceph \
                    jemalloc
 
 # For N2N mapping
-RUN yum -y install http://t2.unl.edu/store/osg/3.4/el7/contrib/x86_64/xrootd-cmstfc-1.5.2-3.osg34.el7.x86_64.rpm
+RUN yum -y install http://repos.gridpp.rl.ac.uk/yum/xrootd-cmstfc/el7/xrootd-cmstfc-1.5.2-6.osgup.el7.x86_64.rpm
 
 # Needed by the health-check scripts
 RUN yum -y install openssl
