@@ -1,6 +1,6 @@
 [xrootd-scd-el7-x86_64]
 name = xrootd-scd-el7-x86_64
-baseurl = http://repos.gridpp.rl.ac.uk/yum/xrootd-scd/luminous/el7/x86_64/
+baseurl = http://repos.gridpp.rl.ac.uk/yum/xrootd-scd/nautilus/el7/x86_64/
 metadata_expire = 7d
 enabled = 1
 gpgcheck = 0
