@@ -1,0 +1,9 @@
+[tier1-sl7-local]
+name=tier1-sl7-local
+baseurl=    http://repos.gridpp.rl.ac.uk/yum/local/sl7/
+
+metadata_expire=7d
+enabled=1
+gpgcheck=0
+priority=30
+skip_if_unavailable=0
