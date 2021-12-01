@@ -6,6 +6,9 @@ name: Docker
 # documentation.
 
 on:
+  schedule:
+    # Run image build on the first of every month
+    - cron: '0 0 1 * *'
   push:
     # Publish tags which look like dates followed by a number as releases.
     tags: ['2[0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9].[0-9]+']
