@@ -13,10 +13,10 @@ RUN yummy zip curl
 # Create all possible pool accounts
 RUN curl -s https://raw.githubusercontent.com/stfc/grid-workernode/master/resources/pool_accounts/create.sh | bash -
 
-# CVMFS (for SUM tests only; install before adding other repos to ensure we have the latest version)
+# CVMFS (for SAM tests only - SAM tests will fail without client; install before adding other repos to ensure we have the latest version)
 RUN yummy https://ecsft.cern.ch/dist/cvmfs/cvmfs-release/cvmfs-release-latest.noarch.rpm \
                    https://ecsft.cern.ch/dist/cvmfs/cvmfs-config-egi/cvmfs-config-egi-2.0-1.el7.centos.noarch.rpm && \
-    yummy cvmfs-2.5.2-1.el7.x86_64
+    yummy cvmfs
 
 # EPEL
 RUN yummy https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
@@ -25,7 +25,7 @@ RUN yummy https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 RUN yummy freetype expat gcc glibc-headers compat-openldap time man unzip quota attr tcsh
 
 # Install HEP_OSlibs
-RUN yummy http://linuxsoft.cern.ch/wlcg/centos7/x86_64/HEP_OSlibs-7.2.10-1.el7.cern.x86_64.rpm
+RUN yummy http://linuxsoft.cern.ch/wlcg/centos7/x86_64/HEP_OSlibs-7.3.1-2.el7.cern.x86_64.rpm
 
 # Machine job features
 RUN yummy http://quattor.web.lal.in2p3.fr/packages/machine-job-features/sl6/noarch/mjf-htcondor-00.19-1.noarch.rpm
@@ -41,7 +41,8 @@ RUN yummy singularity singularity-runtime
 # Disable overlay and loop device management in singularity
 RUN sed -i '/enable overlay/c\enable overlay = no' /etc/singularity/singularity.conf && \
     sed -i '/enable underlay/c\enable underlay = yes' /etc/singularity/singularity.conf && \
-    sed -i '/max loop devices/c\max loop devices = 0' /etc/singularity/singularity.conf
+    sed -i '/max loop devices/c\max loop devices = 0' /etc/singularity/singularity.conf && \
+    sed -i '/allow setuid/c\allow setuid = no' /etc/singularity/singularity.conf
 
 # Update & cleanup
 RUN yum -y update && \
