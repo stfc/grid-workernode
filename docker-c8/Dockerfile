@@ -1,4 +1,4 @@
-FROM centos:8
+FROM rockylinux:8
 
 RUN dnf -y install zip curl
 
@@ -27,6 +27,9 @@ RUN dnf -y install singularity
 RUN sed -i '/enable overlay/c\enable overlay = no' /etc/singularity/singularity.conf && \
     sed -i '/enable underlay/c\enable underlay = yes' /etc/singularity/singularity.conf && \
     sed -i '/max loop devices/c\max loop devices = 0' /etc/singularity/singularity.conf
+
+# Deny setuid in Singularity
+RUN sed -i '/allow setuid/c\allow setuid = no' /etc/singularity/singularity.conf
 
 # Update & cleanup
 RUN dnf -y update && \
