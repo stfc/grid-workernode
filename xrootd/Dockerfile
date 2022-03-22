@@ -74,5 +74,7 @@ RUN yum -y install xrd-cephsum \
                    python3 \
                    python3-rados
 
+# Copy directory containing client-side Ceph libraris and dependencies to get new version of RADOS Striper
+COPY ceph /opt/lib/ceph
 COPY docker-entrypoint.sh /
 ENTRYPOINT ["/docker-entrypoint.sh"]
