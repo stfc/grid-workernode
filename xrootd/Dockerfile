@@ -79,5 +79,8 @@ RUN yum -y update && \
                    yum clean all && \
                    rm -rf /var/cache/yum
 
+# Copy directory containing client-side Ceph libraries and dependencies to get new version of RADOS Striper
+COPY ceph /opt/lib/ceph
+
 COPY docker-entrypoint.sh /
 ENTRYPOINT ["/docker-entrypoint.sh"]
