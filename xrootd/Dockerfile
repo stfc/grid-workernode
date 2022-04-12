@@ -1,6 +1,6 @@
 FROM centos:7
-ARG XROOTD_VERSION=5.2.0-1
-ARG XRDCEPH_VERSION=5.2.0-1
+ARG XROOTD_VERSION=5.3.3-1
+ARG XRDCEPH_VERSION=5.3.4-1
 ARG CEPH_VERSION=14.2.15-0
 LABEL xrootd-ver=$XROOTD_VERSION
 LABEL xrdceph-ver=$XRDCEPH_VERSION
@@ -42,12 +42,12 @@ RUN yum -y versionlock add ceph-${CEPH_VERSION}.el7.x86_64 \
                            xrootd-client-${XROOTD_VERSION}.el7.x86_64 \
                            xrootd-client-libs-${XROOTD_VERSION}.el7.x86_64 \
                            xrootd-libs-${XROOTD_VERSION}.el7.x86_64 \
-                           xrootd-selinux-${XROOTD_VERSION}.el7.x86_64 \
+                           xrootd-selinux-${XROOTD_VERSION}.el7.noarch \
                            xrootd-server-${XROOTD_VERSION}.el7.x86_64 \
                            xrootd-server-libs-${XROOTD_VERSION}.el7.x86_64 \
                            xrootd-ceph-${XRDCEPH_VERSION}.el7.x86_64
 
-RUN yum -y versionlock list 
+RUN yum -y versionlock list
 
 
 # Ceph
@@ -69,12 +69,18 @@ RUN yum -y install http://repos.gridpp.rl.ac.uk/yum/xrootd-cmstfc/el7/xrootd-cms
 # Needed by the health-check scripts
 RUN yum -y install openssl
 
-# python3 needed for cephsum script 
+# python3 needed for cephsum script
 RUN yum -y install xrd-cephsum \
                    python3 \
                    python3-rados
 
-# Copy directory containing client-side Ceph libraris and dependencies to get new version of RADOS Striper
+# Update & cleanup
+RUN yum -y update && \
+                   yum clean all && \
+                   rm -rf /var/cache/yum
+
+# Copy directory containing client-side Ceph libraries and dependencies to get new version of RADOS Striper
 COPY ceph /opt/lib/ceph
+
 COPY docker-entrypoint.sh /
 ENTRYPOINT ["/docker-entrypoint.sh"]

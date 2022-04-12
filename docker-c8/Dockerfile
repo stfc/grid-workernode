@@ -1,4 +1,4 @@
-FROM centos:8
+FROM rockylinux:8
 
 RUN dnf -y install zip curl
 
@@ -7,7 +7,7 @@ RUN curl -s https://raw.githubusercontent.com/stfc/grid-workernode/master/resour
 
 # CVMFS (for SUM tests only; install before adding other repos to ensure we have the latest version)
 RUN dnf -y install https://ecsft.cern.ch/dist/cvmfs/cvmfs-release/cvmfs-release-latest.noarch.rpm \
-                   https://download.opensuse.org/repositories/home:/cvmfs:/contrib-egi/CentOS_8/noarch/cvmfs-config-egi-2.5-1.6.obs.el8.noarch.rpm
+                   https://download.opensuse.org/repositories/home:/cvmfs:/contrib-egi/CentOS_8/noarch/cvmfs-config-egi-2.6-1.7.obs.el8.noarch.rpm
 
 # EPEL
 RUN dnf -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
@@ -27,6 +27,9 @@ RUN dnf -y install singularity
 RUN sed -i '/enable overlay/c\enable overlay = no' /etc/singularity/singularity.conf && \
     sed -i '/enable underlay/c\enable underlay = yes' /etc/singularity/singularity.conf && \
     sed -i '/max loop devices/c\max loop devices = 0' /etc/singularity/singularity.conf
+
+# Deny setuid in Singularity
+RUN sed -i '/allow setuid/c\allow setuid = no' /etc/singularity/singularity.conf
 
 # Update & cleanup
 RUN dnf -y update && \
