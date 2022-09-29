@@ -24,6 +24,9 @@ RUN yummy https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 # Basic dependencies
 RUN yummy freetype expat gcc glibc-headers compat-openldap time man unzip quota attr tcsh
 
+# Install Python3
+RUN yummy python3
+
 # Install HEP_OSlibs
 RUN yummy http://linuxsoft.cern.ch/wlcg/centos7/x86_64/HEP_OSlibs-7.3.1-2.el7.cern.x86_64.rpm
 
