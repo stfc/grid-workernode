@@ -38,16 +38,16 @@ RUN yummy boost-date-time boost-filesystem boost-graph boost-iostreams boost-pro
                    boost-python boost-regex boost-serialization boost-signals boost-system boost-test \
                    boost-thread boost-wave
 
-# Singularity
-RUN yummy singularity singularity-runtime
+# Apptainer
+RUN yummy apptainer
 
-# Disable overlay and loop device management in singularity
-RUN sed -i '/enable overlay/c\enable overlay = no' /etc/singularity/singularity.conf && \
-    sed -i '/enable underlay/c\enable underlay = yes' /etc/singularity/singularity.conf && \
-    sed -i '/max loop devices/c\max loop devices = 0' /etc/singularity/singularity.conf
+# Disable overlay and loop device management in apptainer
+RUN sed -i '/enable overlay/c\enable overlay = no' /etc/apptainer/apptainer.conf && \
+    sed -i '/enable underlay/c\enable underlay = yes' /etc/apptainer/apptainer.conf && \
+    sed -i '/max loop devices/c\max loop devices = 0' /etc/apptainer/apptainer.conf
 
-# Deny setuid in Singularity
-RUN sed -i '/allow setuid/c\allow setuid = no' /etc/singularity/singularity.conf
+# Deny setuid in Apptainer
+RUN sed -i '/allow setuid/c\allow setuid = no' /etc/apptainer/apptainer.conf
 
 # Update & cleanup
 RUN yum -y update && \
