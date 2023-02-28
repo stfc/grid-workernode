@@ -1,0 +1,54 @@
+#!/bin/bash
+
+# Check gridmap file existence & age
+file=/etc/gateway/grid-mapfile
+if [ -f $file ]; then
+    lastModified=`echo $(($(date +%s) - $(date +%s -r $file)))`
+    if [ $lastModified -gt 172800 ]; then
+        echo "Gridmap file is too old (last modified $lastModified seconds ago)"
+        exit 1
+    fi
+else
+    echo "Gridmap file does not exist"
+    exit 1
+fi
+
+# Check host certificate existence
+if [ ! -s /etc/gateway/hostcert.pem ]; then
+    echo "hostcert.pem doesn't exist or is zero-sized"
+    exit 1
+fi
+
+if [ ! -s /etc/gateway/hostkey.pem ]; then
+    echo "hostkey.pem doesn't exist or is zero-sized"
+    exit 1
+fi
+
+# Check expiry
+openssl x509 -checkend 7200 -noout -in /etc/gateway/hostcert.pem > /dev/null 2>&1
+RC=$?
+if [ $RC -gt 0 ]; then
+    echo "Host certificate is about to expire"
+    exit 1
+fi
+
+# Check for subject alt names
+SANS=`openssl x509 -in /etc/gateway/hostcert.pem -noout -text | sed -ne '/Subject Alternative Name/{n;p}'`
+if grep -v -q "DNS:\*.echo.stfc.ac.uk" <(echo $SANS); then
+    echo "Host certificate does not contain required subject alt names"
+    exit 1
+fi
+
+# Check the Ceph keyring
+if [ ! -s /etc/ceph/ceph.client.xrootd.keyring ]; then
+    echo "Ceph keyring doesn't exist or is zero-sized"
+    exit 1
+fi
+
+nc -z localhost 1094
+if [ "$?" -ne 0 ]; then
+    echo "Gateway does not listen the required port"
+    exit 1
+fi
+
+exit 0
