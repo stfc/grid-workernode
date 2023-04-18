@@ -22,7 +22,19 @@ RUN yummy https://ecsft.cern.ch/dist/cvmfs/cvmfs-release/cvmfs-release-latest.no
 RUN yummy https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 
 # Basic dependencies
-RUN yummy freetype expat gcc glibc-headers compat-openldap time man unzip quota attr tcsh
+RUN yummy \
+  freetype \
+  expat \
+  gcc \
+  glibc-headers \
+  compat-openldap \
+  time \
+  man \
+  unzip \
+  quota \
+  attr \
+  tcsh \
+  numactl
 
 # Install Python3
 RUN yummy python3

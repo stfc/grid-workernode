@@ -13,7 +13,18 @@ RUN dnf -y install https://ecsft.cern.ch/dist/cvmfs/cvmfs-release/cvmfs-release-
 RUN dnf -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
 
 # Basic dependencies
-RUN dnf -y install freetype expat gcc glibc-headers time man unzip quota attr tcsh
+RUN dnf -y install \
+  freetype \
+  expat \
+  gcc \
+  glibc-headers \
+  time \
+  man \
+  unzip \
+  quota \
+  attr \
+  tcsh \
+  numactl
 
 # Boost (need to ensure gfal CLI from CVMFS will work for some VOs)
 RUN dnf -y install boost-date-time boost-filesystem boost-graph boost-iostreams boost-program-options \
