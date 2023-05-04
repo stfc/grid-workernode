@@ -1,6 +1,6 @@
 FROM centos:7
 ARG XROOTD_VERSION=5.3.3-2
-ARG XRDCEPH_VERSION=5.3.4-1
+ARG XRDCEPH_VERSION=5.3.3-3
 ARG CEPH_VERSION=14.2.15-0
 LABEL xrootd-ver=$XROOTD_VERSION
 LABEL xrdceph-ver=$XRDCEPH_VERSION
@@ -63,8 +63,7 @@ RUN yum -y install xrootd-ceph \
                    xrootd-server \
                    xrootd-server-libs \
                    xrootd-voms \
-                   jemalloc 
-                   
+                   jemalloc
 
 # Install custom version of libradosstriper
 # This RPM is it replaces the rados version installed by the ceph package with the lockless version
@@ -82,10 +81,18 @@ RUN yum -y install xrd-cephsum \
                    python3 \
                    python3-rados
 
+# Install netcat for service healthcheck
+RUN yum -y install netcat
+
 # Update & cleanup
 RUN yum -y update && \
                    yum clean all && \
                    rm -rf /var/cache/yum
+
+# Bake healthcheck script
+COPY xrootd-healthcheck.sh .
+HEALTHCHECK --interval=180s --timeout=10s --retries=2 \
+    CMD bash xrootd-healthcheck.sh
 
 COPY docker-entrypoint.sh /
 ENTRYPOINT ["/docker-entrypoint.sh"]
