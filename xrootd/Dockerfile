@@ -45,7 +45,7 @@ RUN yum -y versionlock add ceph-${CEPH_VERSION}.el7.x86_64 \
                            xrootd-selinux-${XROOTD_VERSION}.el7.noarch \
                            xrootd-server-${XROOTD_VERSION}.el7.x86_64 \
                            xrootd-server-libs-${XROOTD_VERSION}.el7.x86_64 \
-                           xrootd-ceph-${XRDCEPH_VERSION}.el7.x86_64 \
+                           xrootd-ceph-buffered-${XRDCEPH_VERSION}.el7.x86_64 \
                            xrootd-voms-${XROOTD_VERSION}.el7.x86_64
 
 RUN yum -y versionlock list
