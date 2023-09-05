@@ -2,9 +2,13 @@ FROM centos:7
 ARG XROOTD_VERSION=5.5.4-2
 ARG XRDCEPH_VERSION=5.5.4-3
 ARG CEPH_VERSION=14.2.15-0
+ARG ALICE_AUTH_VERSION=1.3.1-2
+ARG TOKENAUTHZ_VERSION=1.2.5-1
 LABEL xrootd-ver=$XROOTD_VERSION
 LABEL xrdceph-ver=$XRDCEPH_VERSION
 LABEL ceph-ver=$CEPH_VERSION
+LABEL alice-auth-ver=$ALICE_AUTH_VERSION
+LABEL token-authz-ver=$TOKENAUTHZ_VERSION
 
 # xrootd user - needs to be consistent with the host
 RUN groupadd --gid 65432 xrootd && \
@@ -46,7 +50,9 @@ RUN yum -y versionlock add ceph-${CEPH_VERSION}.el7.x86_64 \
                            xrootd-server-${XROOTD_VERSION}.el7.x86_64 \
                            xrootd-server-libs-${XROOTD_VERSION}.el7.x86_64 \
                            xrootd-ceph-buffered-${XRDCEPH_VERSION}.el7.x86_64 \
-                           xrootd-voms-${XROOTD_VERSION}.el7.x86_64
+                           xrootd-voms-${XROOTD_VERSION}.el7.x86_64 \
+                           xrootd-alicetokenacc-${ALICE_AUTH_VERSION}.el7.x86_64 \
+                           tokenauthz-${TOKENAUTHZ_VERSION}.el7.x86_64
 
 RUN yum -y versionlock list
 
@@ -63,7 +69,10 @@ RUN yum -y install xrootd-ceph-buffered \
                    xrootd-server \
                    xrootd-server-libs \
                    xrootd-voms \
-                   jemalloc
+                   jemalloc 
+                   
+RUN yum -y install xrootd-alicetokenacc \
+                   tokenauthz
 
 # Install custom version of libradosstriper
 # This RPM is it replaces the rados version installed by the ceph package with the lockless version

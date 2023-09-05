@@ -1,0 +1,7 @@
+[wlcg-x86_64-el7]
+name=wlcg-x86_64-el7
+baseurl=    http://mirrors.gridpp.rl.ac.uk/live/wlcg-x86_64/RPMS.el7/
+metadata_expire=7d
+enabled=1
+gpgcheck=0
+skip_if_unavailable=0

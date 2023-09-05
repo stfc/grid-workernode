@@ -1,0 +1,7 @@
+[xrootd-alice-el7-x86_64]
+name=xrootd-alice-el7-x86_64
+baseurl=    http://repos.gridpp.rl.ac.uk/yum/xrootd-alice/el7/
+metadata_expire=7d
+enabled=1
+gpgcheck=0
+skip_if_unavailable=0
