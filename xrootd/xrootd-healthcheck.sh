@@ -45,7 +45,9 @@ if [ ! -s /etc/ceph/ceph.client.xrootd.keyring ]; then
     exit 1
 fi
 
-nc -z localhost 1094
+# Monitor ports for both the gateway and proxy xrootd service.
+# We only need one of these monitors to succeed for the check to pass
+nc -z localhost 1094 || nc -z localhost 1095
 if [ "$?" -ne 0 ]; then
     echo "Gateway does not listen the required port"
     exit 1
