@@ -65,10 +65,6 @@ RUN yum -y install xrootd-ceph-buffered \
                    xrootd-voms \
                    jemalloc
 
-# Install custom version of libradosstriper
-# This RPM is it replaces the rados version installed by the ceph package with the lockless version
-# Allows Vector-read capabilities for xrootd
-RUN yum -y install newstriperanddeps
 
 # For N2N mapping
 RUN yum -y install http://repos.gridpp.rl.ac.uk/yum/xrootd-cmstfc/el7/xrootd-cmstfc-1.5.2-6.osgup.el7.x86_64.rpm
