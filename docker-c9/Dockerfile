@@ -46,3 +46,7 @@ RUN sed -i '/allow setuid/c\allow setuid = no' /etc/apptainer/apptainer.conf
 RUN dnf -y update && \
     dnf clean all && \
     rm -rf /var/cache/dnf
+
+LABEL source=https://github.com/stfc/grid-workernode
+LABEL description="A specialised container image optimized for high-performance batch job execution in RAL's computing environment. \
+It includes essential software, libraries, and dependencies, ensuring efficient, and scalable job processing, benefiting researchers and organisations."
