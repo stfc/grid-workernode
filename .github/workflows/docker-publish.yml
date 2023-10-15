@@ -34,7 +34,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        context: ['docker-c7', 'docker-c8']
+        context: ['docker-c7', 'docker-c8', 'docker-c9']
 
     steps:
       - name: Checkout repository
