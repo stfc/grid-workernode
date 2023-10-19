@@ -1,16 +1,16 @@
-FROM rockylinux:8
+FROM rockylinux:9
 
-RUN dnf -y install zip curl
+RUN dnf -y install zip curl-minimal
 
 # Create all possible pool accounts
 RUN curl -s https://raw.githubusercontent.com/stfc/grid-workernode/master/resources/pool_accounts/create.sh | bash -
 
 # CVMFS (for SUM tests only; install before adding other repos to ensure we have the latest version)
 RUN dnf -y install https://ecsft.cern.ch/dist/cvmfs/cvmfs-release/cvmfs-release-latest.noarch.rpm \
-                   https://download.opensuse.org/repositories/home:/cvmfs:/contrib-egi/CentOS_8/noarch/cvmfs-config-egi-2.6-1.7.obs.el8.noarch.rpm
+                   https://download.opensuse.org/repositories/home:/cvmfs:/contrib-egi/AlmaLinux_9/noarch/cvmfs-config-egi-2.6-1.7.obs.el9.noarch.rpm
 
 # EPEL
-RUN dnf -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+RUN dnf -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
 
 # Basic dependencies
 RUN dnf -y install \
@@ -28,7 +28,7 @@ RUN dnf -y install \
 
 # Boost (need to ensure gfal CLI from CVMFS will work for some VOs)
 RUN dnf -y install boost-date-time boost-filesystem boost-graph boost-iostreams boost-program-options \
-                   boost-regex boost-serialization boost-signals boost-system boost-test \
+                   boost-regex boost-serialization boost-system boost-test \
                    boost-thread boost-wave
 
 # Apptainer
