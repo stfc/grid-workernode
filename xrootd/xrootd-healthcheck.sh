@@ -52,5 +52,20 @@ if [ "$?" -ne 0 ]; then
     echo "Gateway does not listen the required port"
     exit 1
 fi
+# Check xrootd gateway stat
+if [[ -z "${ISGATEWAY}" ]]; then
+    echo "proxy - skipping read check"
+else
+    export XrdSecSSSKT=/etc/gateway/sss.keytab.grp
+    fileno=$((RANDOM % 999))
+    filename=$(printf 'dteam:test/test%04d' "$fileno")
+    /usr/bin/xrdfs root://localhost:1095 stat $filename > /dev/null 2>&1
+    if [ "$?" -ne 0 ]; then
+      echo "Gateway failed to stat"
+      exit 1
+    fi
+fi
+
+
 
 exit 0
