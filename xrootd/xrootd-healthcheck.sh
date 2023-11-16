@@ -70,6 +70,7 @@ if [[ -z "${netstatus}" ]]; then
   echo "net ok"
 else
   if [[ $netstatus > 500 ]]; then
+    echo "${netstatus} close-waits found"
     exit 1
   fi
 fi
