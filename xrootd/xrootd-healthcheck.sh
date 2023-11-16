@@ -65,7 +65,12 @@ else
       exit 1
     fi
 fi
-
-
-
+netstatus=`ss | awk '{print $2}' | sort | uniq -c | sort -n | grep 'CLOSE' | awk '{print $1}'`
+if [[ -z "${netstatus}" ]]; then
+  echo "net ok"
+else
+  if [[ $netstatus > 500 ]]; then
+    exit 1
+  fi
+fi
 exit 0
