@@ -69,6 +69,7 @@ netstatus=`ss | awk '{print $2}' | sort | uniq -c | sort -n | grep 'CLOSE' | awk
 if [[ -z "${netstatus}" ]]; then
   echo "net ok"
 else
+  echo "${netstatus} close-waits found"
   if [[ $netstatus > 500 ]]; then
     exit 1
   fi
