@@ -1,0 +1,9 @@
+[tier1-el8-local]
+name=tier1-el8-local
+baseurl=    http://repos.gridpp.rl.ac.uk/yum/local/el8/
+
+metadata_expire=7d
+enabled=1
+gpgcheck=0
+priority=30
+skip_if_unavailable=0

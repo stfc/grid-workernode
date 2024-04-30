@@ -1,6 +1,6 @@
-[epel-7-x86_64]
-name = epel-7-x86_64
-baseurl = http://mirrors.gridpp.rl.ac.uk/current/epel-7-x86_64/RPMS.base/
+[epel-8-x86_64]
+name = epel-8-x86_64
+baseurl = http://mirrors.gridpp.rl.ac.uk/current/epel-8-x86_64/RPMS.base/
 metadata_expire = 7d
 exclude = *ceph* librados* librbd* librgw* python-rados python-rbd rbd-fuse rbd-mirror rbd-nbd xrootd*
 enabled = 1

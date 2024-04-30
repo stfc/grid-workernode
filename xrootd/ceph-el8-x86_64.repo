@@ -1,0 +1,8 @@
+[ceph-el8-x86_64]
+name = ceph-el8-x86_64
+baseurl = http://mirrors.gridpp.rl.ac.uk/current/ceph-el8-x86_64/RPMS.nautilus/
+metadata_expire = 7d
+enabled = 1
+gpgcheck = 0
+priority = 40
+skip_if_unavailable = 0

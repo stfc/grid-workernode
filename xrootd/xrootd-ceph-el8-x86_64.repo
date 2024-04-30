@@ -1,0 +1,8 @@
+[xrootd-ceph-el8-x86_64]
+name = xrootd-ceph-el8-x86_64
+baseurl = http://repos.gridpp.rl.ac.uk/yum/xrootd-ceph/nautilus/el8/x86_64/
+metadata_expire = 7d
+enabled = 1
+gpgcheck = 0
+priority = 30
+skip_if_unavailable = 0
