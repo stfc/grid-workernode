@@ -1,0 +1,8 @@
+[xrootd-el8-x86_64]
+name = xrootd-el8-x86_64
+baseurl = http://mirrors.gridpp.rl.ac.uk/current/xrootd-el8-x86_64/RPMS.xrootd-org/
+metadata_expire = 7d
+enabled = 1
+gpgcheck = 0
+priority = 30
+skip_if_unavailable = 0
