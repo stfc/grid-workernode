@@ -63,7 +63,6 @@ RUN dnf -y install xrootd-ceph-buffered \
                    xrootd-server \
                    xrootd-server-libs \
                    xrootd-voms \
-                   xrootd-ceph-ckslib \
                    jemalloc
 
 
@@ -74,8 +73,7 @@ RUN dnf -y install http://repos.gridpp.rl.ac.uk/yum/xrootd-cmstfc/el8/xrootd-cms
 RUN dnf -y install openssl
 
 # python3 needed for cephsum script
-RUN dnf -y install xrd-cephsum \
-                   python3 \
+RUN dnf -y install python3 \
                    python3-rados
 
 # Install netcat for service healthcheck
