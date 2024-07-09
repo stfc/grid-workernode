@@ -34,11 +34,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        context: ['docker-c7', 'docker-c8', 'docker-c9']
+        context: ['docker-c8', 'docker-c9']
         # Define platform for images
         include:
-          - context: docker-c7
-            platform: linux/amd64
           - context: docker-c8
             platform: linux/amd64,linux/arm64
           - context: docker-c9
