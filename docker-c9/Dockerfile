@@ -21,7 +21,7 @@ RUN curl -s https://raw.githubusercontent.com/stfc/grid-workernode/master/resour
 
 # CVMFS (for SUM tests only; install before adding other repos to ensure we have the latest version)
 RUN dnf -y install https://ecsft.cern.ch/dist/cvmfs/cvmfs-release/cvmfs-release-latest.noarch.rpm \
-                   https://download.opensuse.org/repositories/home:/cvmfs:/contrib-egi/AlmaLinux_9/noarch/cvmfs-config-egi-2.6-1.7.obs.el9.noarch.rpm
+                   https://download.opensuse.org/repositories/home:/cvmfs:/contrib-egi/AlmaLinux_9/noarch/cvmfs-config-egi-2.7-1.8.obs.el9.noarch.rpm
 RUN dnf -y install cvmfs
 
 # EPEL
