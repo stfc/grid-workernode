@@ -14,7 +14,8 @@ RUN dnf -y install \
     quota \
     attr \
     tcsh \
-    numactl
+    numactl \
+    bc
 
 # Create all possible pool accounts
 RUN curl -s https://raw.githubusercontent.com/stfc/grid-workernode/master/resources/pool_accounts/create.sh | bash -
