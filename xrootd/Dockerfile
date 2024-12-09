@@ -46,7 +46,8 @@ RUN dnf -y versionlock add ceph-${CEPH_VERSION}.el8.x86_64 \
                            xrootd-server-${XROOTD_VERSION}.el8.x86_64 \
                            xrootd-server-libs-${XROOTD_VERSION}.el8.x86_64 \
                            xrootd-ceph-buffered-${XRDCEPH_VERSION}.el8.x86_64 \
-                           xrootd-voms-${XROOTD_VERSION}.el8.x86_64
+                           xrootd-voms-${XROOTD_VERSION}.el8.x86_64 \
+                           xrootd-scitokens-${XROOTD_VERSION}.el8.x86_64
 
 RUN dnf -y versionlock list
 
@@ -63,6 +64,7 @@ RUN dnf -y install xrootd-ceph-buffered \
                    xrootd-server \
                    xrootd-server-libs \
                    xrootd-voms \
+                   xrootd-scitokens \
                    jemalloc
 
 
