@@ -1,8 +1,9 @@
 FROM rockylinux:8
 
 # Add labels
-LABEL source=https://github.com/stfc/grid-workernode
-LABEL description="A specialised container image optimized for high-performance batch job execution in RAL's computing environment. \
+LABEL org.opencontainers.image.source=https://github.com/stfc/grid-workernode
+LABEL org.opencontainers.image.authors=gstsm@stfc.atlassian.net
+LABEL org.opencontainers.image.description="A specialised container image optimised for high-performance batch job execution in RAL's computing environment. \
 It includes essential software, libraries, and dependencies, ensuring efficient, and scalable job processing, benefiting researchers and organisations."
 
 # Basic dependencies

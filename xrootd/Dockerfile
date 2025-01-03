@@ -7,6 +7,10 @@ ARG CEPH_VERSION=14.2.22-0
 LABEL xrootd-ver=$XROOTD_VERSION
 LABEL xrdceph-ver=$XRDCEPH_VERSION
 LABEL ceph-ver=$CEPH_VERSION
+LABEL org.opencontainers.image.source=https://github.com/stfc/grid-workernode
+LABEL org.opencontainers.image.authors=gstsm@stfc.atlassian.net
+LABEL org.opencontainers.image.description="A specialised container image optimised as a local XROOTD gateway in RAL's computing environment. \
+It includes software for XROOTD along with libraries, and dependencies, ensuring efficient, and scalable data staging, benefiting researchers and organisations."
 
 # xrootd user - needs to be consistent with the host
 RUN groupadd --gid 65432 xrootd && \
