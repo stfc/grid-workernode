@@ -1,4 +1,6 @@
 FROM rockylinux:8
+
+# Add labels and arguments
 ARG XROOTD_VERSION=5.7.3-3
 ARG XRDCEPH_VERSION=5.7.3-3
 ARG CEPH_VERSION=14.2.22-0
@@ -13,50 +15,52 @@ RUN groupadd --gid 65432 xrootd && \
 # Repositories
 COPY *.repo /etc/yum.repos.d/
 
-# install versionlock, and configure versionlocks
-RUN dnf -y install python3-dnf-plugin-versionlock
-RUN dnf -y versionlock add ceph-${CEPH_VERSION}.el8.x86_64 \
-                           ceph-base-${CEPH_VERSION}.el8.x86_64 \
-                           ceph-common-${CEPH_VERSION}.el8.x86_64 \
-                           ceph-mds-${CEPH_VERSION}.el8.x86_64 \
-                           ceph-mgr-${CEPH_VERSION}.el8.x86_64 \
-                           ceph-mon-${CEPH_VERSION}.el8.x86_64 \
-                           ceph-osd-${CEPH_VERSION}.el8.x86_64 \
-                           ceph-selinux-${CEPH_VERSION}.el8.x86_64 \
-                           libcephfs2-${CEPH_VERSION}.el8.x86_64 \
-                           librados2-${CEPH_VERSION}.el8.x86_64 \
-                           libradosstriper1-${CEPH_VERSION}.el8.x86_64 \
-                           librbd1-${CEPH_VERSION}.el8.x86_64 \
-                           librgw2-${CEPH_VERSION}.el8.x86_64 \
-                           python-ceph-argparse-${CEPH_VERSION}.el8.x86_64 \
-                           python-cephfs-${CEPH_VERSION}.el8.x86_64 \
-                           python-rados-${CEPH_VERSION}.el8.x86_64 \
-                           python-rbd-${CEPH_VERSION}.el8.x86_64 \
-                           python-rgw-${CEPH_VERSION}.el8.x86_64 \
-                           python3-ceph-argparse-${CEPH_VERSION}.el8.x86_64 \
-                           python3-cephfs-${CEPH_VERSION}.el8.x86_64 \
-                           python3-rados-${CEPH_VERSION}.el8.x86_64 \
-                           python3-rbd-${CEPH_VERSION}.el8.x86_64 \
-                           python3-rgw-${CEPH_VERSION}.el8.x86_64 \
-                           xrootd-${XROOTD_VERSION}.el8.x86_64 \
-                           xrootd-client-${XROOTD_VERSION}.el8.x86_64 \
-                           xrootd-client-libs-${XROOTD_VERSION}.el8.x86_64 \
-                           xrootd-libs-${XROOTD_VERSION}.el8.x86_64 \
-                           xrootd-selinux-${XROOTD_VERSION}.el8.noarch \
-                           xrootd-server-${XROOTD_VERSION}.el8.x86_64 \
-                           xrootd-server-libs-${XROOTD_VERSION}.el8.x86_64 \
-                           xrootd-ceph-buffered-${XRDCEPH_VERSION}.el8.x86_64 \
-                           xrootd-voms-${XROOTD_VERSION}.el8.x86_64 \
-                           xrootd-scitokens-${XROOTD_VERSION}.el8.x86_64
+# Install versionlock, and configure versionlocks
+RUN dnf -y install python3-dnf-plugin-versionlock && \
+    dnf -y versionlock add ceph-${CEPH_VERSION}.el8.x86_64 \
+                   ceph-base-${CEPH_VERSION}.el8.x86_64 \
+                   ceph-common-${CEPH_VERSION}.el8.x86_64 \
+                   ceph-mds-${CEPH_VERSION}.el8.x86_64 \
+                   ceph-mgr-${CEPH_VERSION}.el8.x86_64 \
+                   ceph-mon-${CEPH_VERSION}.el8.x86_64 \
+                   ceph-osd-${CEPH_VERSION}.el8.x86_64 \
+                   ceph-selinux-${CEPH_VERSION}.el8.x86_64 \
+                   libcephfs2-${CEPH_VERSION}.el8.x86_64 \
+                   librados2-${CEPH_VERSION}.el8.x86_64 \
+                   libradosstriper1-${CEPH_VERSION}.el8.x86_64 \
+                   librbd1-${CEPH_VERSION}.el8.x86_64 \
+                   librgw2-${CEPH_VERSION}.el8.x86_64 \
+                   python-ceph-argparse-${CEPH_VERSION}.el8.x86_64 \
+                   python-cephfs-${CEPH_VERSION}.el8.x86_64 \
+                   python-rados-${CEPH_VERSION}.el8.x86_64 \
+                   python-rbd-${CEPH_VERSION}.el8.x86_64 \
+                   python-rgw-${CEPH_VERSION}.el8.x86_64 \
+                   python3-ceph-argparse-${CEPH_VERSION}.el8.x86_64 \
+                   python3-cephfs-${CEPH_VERSION}.el8.x86_64 \
+                   python3-rados-${CEPH_VERSION}.el8.x86_64 \
+                   python3-rbd-${CEPH_VERSION}.el8.x86_64 \
+                   python3-rgw-${CEPH_VERSION}.el8.x86_64 \
+                   xrootd-${XROOTD_VERSION}.el8.x86_64 \
+                   xrootd-client-${XROOTD_VERSION}.el8.x86_64 \
+                   xrootd-client-libs-${XROOTD_VERSION}.el8.x86_64 \
+                   xrootd-libs-${XROOTD_VERSION}.el8.x86_64 \
+                   xrootd-selinux-${XROOTD_VERSION}.el8.noarch \
+                   xrootd-server-${XROOTD_VERSION}.el8.x86_64 \
+                   xrootd-server-libs-${XROOTD_VERSION}.el8.x86_64 \
+                   xrootd-ceph-buffered-${XRDCEPH_VERSION}.el8.x86_64 \
+                   xrootd-voms-${XROOTD_VERSION}.el8.x86_64 \
+                   xrootd-scitokens-${XROOTD_VERSION}.el8.x86_64 && \
+    # For debugging purposes, show the versionlock list
+    dnf -y versionlock list
 
-RUN dnf -y versionlock list
-
-
-# Ceph
+# Install CEPH
 RUN dnf -y install ceph \
-                   ceph-common
+                   ceph-common && \
+                    # Clean up cache to keep layer size small
+                    dnf clean all && \
+                    rm -rf /var/cache/dnf
 
-# xrootd
+# Install XROOTD
 RUN dnf -y install xrootd-ceph-buffered \
                    xrootd-client \
                    xrootd-client-libs \
@@ -65,23 +69,34 @@ RUN dnf -y install xrootd-ceph-buffered \
                    xrootd-server-libs \
                    xrootd-voms \
                    xrootd-scitokens \
-                   jemalloc
-
+                   jemalloc && \
+                   # Clean up cache to keep layer size small
+                   dnf clean all && \
+                   rm -rf /var/cache/dnf
 
 # For N2N mapping
 RUN dnf -y install http://repos.gridpp.rl.ac.uk/yum/xrootd-cmstfc/el8/xrootd-cmstfc-1.5.2-6.osgroup.el8.x86_64.rpm
 
-# Needed by the health-check scripts
-RUN dnf -y install openssl
+# Required for health-check scripts
+RUN dnf -y install openssl && \
+                   # Clean up cache to keep layer size small
+                   dnf clean all && \
+                   rm -rf /var/cache/dnf
 
-# python3 needed for cephsum script
+# Python3 required for cephsum script
 RUN dnf -y install python3 \
-                   python3-rados
+                   python3-rados && \
+                   # Clean up cache to keep layer size small
+                   dnf clean all && \
+                   rm -rf /var/cache/dnf
 
 # Install netcat for service healthcheck
-RUN dnf -y install netcat
+RUN dnf -y install netcat && \
+                   # Clean up cache to keep layer size small
+                   dnf clean all && \
+                   rm -rf /var/cache/dnf
 
-# Update & cleanup
+# Update OS packages & tidy up
 RUN dnf -y update && \
                    dnf clean all && \
                    rm -rf /var/cache/dnf
