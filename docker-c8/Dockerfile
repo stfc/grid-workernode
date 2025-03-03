@@ -21,7 +21,8 @@ RUN dnf -y install \
     attr \
     tcsh \
     numactl \
-    bc && \
+    bc \
+    wget && \
     # Clean up cache to keep layer size small
     dnf clean all && \
     rm -rf /var/cache/dnf
