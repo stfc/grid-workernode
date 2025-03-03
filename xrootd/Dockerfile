@@ -4,6 +4,8 @@ FROM rockylinux:8
 ARG XROOTD_VERSION=5.7.3-3
 ARG XRDCEPH_VERSION=5.7.3-3
 ARG CEPH_VERSION=14.2.22-0
+ARG ARCH=x86_64
+ARG DISTRO=el8
 LABEL xrootd-ver=$XROOTD_VERSION
 LABEL xrdceph-ver=$XRDCEPH_VERSION
 LABEL ceph-ver=$CEPH_VERSION
@@ -21,39 +23,39 @@ COPY *.repo /etc/yum.repos.d/
 
 # Install versionlock, and configure versionlocks
 RUN dnf -y install python3-dnf-plugin-versionlock && \
-    dnf -y versionlock add ceph-${CEPH_VERSION}.el8.x86_64 \
-                   ceph-base-${CEPH_VERSION}.el8.x86_64 \
-                   ceph-common-${CEPH_VERSION}.el8.x86_64 \
-                   ceph-mds-${CEPH_VERSION}.el8.x86_64 \
-                   ceph-mgr-${CEPH_VERSION}.el8.x86_64 \
-                   ceph-mon-${CEPH_VERSION}.el8.x86_64 \
-                   ceph-osd-${CEPH_VERSION}.el8.x86_64 \
-                   ceph-selinux-${CEPH_VERSION}.el8.x86_64 \
-                   libcephfs2-${CEPH_VERSION}.el8.x86_64 \
-                   librados2-${CEPH_VERSION}.el8.x86_64 \
-                   libradosstriper1-${CEPH_VERSION}.el8.x86_64 \
-                   librbd1-${CEPH_VERSION}.el8.x86_64 \
-                   librgw2-${CEPH_VERSION}.el8.x86_64 \
-                   python-ceph-argparse-${CEPH_VERSION}.el8.x86_64 \
-                   python-cephfs-${CEPH_VERSION}.el8.x86_64 \
-                   python-rados-${CEPH_VERSION}.el8.x86_64 \
-                   python-rbd-${CEPH_VERSION}.el8.x86_64 \
-                   python-rgw-${CEPH_VERSION}.el8.x86_64 \
-                   python3-ceph-argparse-${CEPH_VERSION}.el8.x86_64 \
-                   python3-cephfs-${CEPH_VERSION}.el8.x86_64 \
-                   python3-rados-${CEPH_VERSION}.el8.x86_64 \
-                   python3-rbd-${CEPH_VERSION}.el8.x86_64 \
-                   python3-rgw-${CEPH_VERSION}.el8.x86_64 \
-                   xrootd-${XROOTD_VERSION}.el8.x86_64 \
-                   xrootd-client-${XROOTD_VERSION}.el8.x86_64 \
-                   xrootd-client-libs-${XROOTD_VERSION}.el8.x86_64 \
-                   xrootd-libs-${XROOTD_VERSION}.el8.x86_64 \
-                   xrootd-selinux-${XROOTD_VERSION}.el8.noarch \
-                   xrootd-server-${XROOTD_VERSION}.el8.x86_64 \
-                   xrootd-server-libs-${XROOTD_VERSION}.el8.x86_64 \
-                   xrootd-ceph-buffered-${XRDCEPH_VERSION}.el8.x86_64 \
-                   xrootd-voms-${XROOTD_VERSION}.el8.x86_64 \
-                   xrootd-scitokens-${XROOTD_VERSION}.el8.x86_64 && \
+    dnf -y versionlock add ceph-${CEPH_VERSION}.${DISTRO}.${ARCH} \
+                   ceph-base-${CEPH_VERSION}.${DISTRO}.${ARCH} \
+                   ceph-common-${CEPH_VERSION}.${DISTRO}.${ARCH} \
+                   ceph-mds-${CEPH_VERSION}.${DISTRO}.${ARCH} \
+                   ceph-mgr-${CEPH_VERSION}.${DISTRO}.${ARCH} \
+                   ceph-mon-${CEPH_VERSION}.${DISTRO}.${ARCH} \
+                   ceph-osd-${CEPH_VERSION}.${DISTRO}.${ARCH} \
+                   ceph-selinux-${CEPH_VERSION}.${DISTRO}.${ARCH} \
+                   libcephfs2-${CEPH_VERSION}.${DISTRO}.${ARCH} \
+                   librados2-${CEPH_VERSION}.${DISTRO}.${ARCH} \
+                   libradosstriper1-${CEPH_VERSION}.${DISTRO}.${ARCH} \
+                   librbd1-${CEPH_VERSION}.${DISTRO}.${ARCH} \
+                   librgw2-${CEPH_VERSION}.${DISTRO}.${ARCH} \
+                   python-ceph-argparse-${CEPH_VERSION}.${DISTRO}.${ARCH} \
+                   python-cephfs-${CEPH_VERSION}.${DISTRO}.${ARCH} \
+                   python-rados-${CEPH_VERSION}.${DISTRO}.${ARCH} \
+                   python-rbd-${CEPH_VERSION}.${DISTRO}.${ARCH} \
+                   python-rgw-${CEPH_VERSION}.${DISTRO}.${ARCH} \
+                   python3-ceph-argparse-${CEPH_VERSION}.${DISTRO}.${ARCH} \
+                   python3-cephfs-${CEPH_VERSION}.${DISTRO}.${ARCH} \
+                   python3-rados-${CEPH_VERSION}.${DISTRO}.${ARCH} \
+                   python3-rbd-${CEPH_VERSION}.${DISTRO}.${ARCH} \
+                   python3-rgw-${CEPH_VERSION}.${DISTRO}.${ARCH} \
+                   xrootd-${XROOTD_VERSION}.${DISTRO}.${ARCH} \
+                   xrootd-client-${XROOTD_VERSION}.${DISTRO}.${ARCH} \
+                   xrootd-client-libs-${XROOTD_VERSION}.${DISTRO}.${ARCH} \
+                   xrootd-libs-${XROOTD_VERSION}.${DISTRO}.${ARCH} \
+                   xrootd-selinux-${XROOTD_VERSION}.${DISTRO}.noarch \
+                   xrootd-server-${XROOTD_VERSION}.${DISTRO}.${ARCH} \
+                   xrootd-server-libs-${XROOTD_VERSION}.${DISTRO}.${ARCH} \
+                   xrootd-ceph-buffered-${XRDCEPH_VERSION}.${DISTRO}.${ARCH} \
+                   xrootd-voms-${XROOTD_VERSION}.${DISTRO}.${ARCH} \
+                   xrootd-scitokens-${XROOTD_VERSION}.${DISTRO}.${ARCH} && \
     # For debugging purposes, show the versionlock list
     dnf -y versionlock list
 
@@ -79,7 +81,7 @@ RUN dnf -y install xrootd-ceph-buffered \
                    rm -rf /var/cache/dnf
 
 # For N2N mapping
-RUN dnf -y install http://repos.gridpp.rl.ac.uk/yum/xrootd-cmstfc/el8/xrootd-cmstfc-1.5.2-6.osgroup.el8.x86_64.rpm
+RUN dnf -y install http://repos.gridpp.rl.ac.uk/yum/xrootd-cmstfc/${DISTRO}/xrootd-cmstfc-1.5.2-6.osgroup.${DISTRO}.${ARCH}.rpm
 
 # Required for health-check scripts
 RUN dnf -y install openssl && \
