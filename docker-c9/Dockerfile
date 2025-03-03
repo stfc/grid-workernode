@@ -67,10 +67,3 @@ RUN dnf -y update && \
 
 # Create all possible pool accounts
 RUN curl -s https://raw.githubusercontent.com/stfc/grid-workernode/master/resources/pool_accounts/create.sh | bash -
-
-# Disable overlay and loop device management in Apptainer
-RUN sed -i '/enable overlay/c\enable overlay = no' /etc/apptainer/apptainer.conf && \
-    sed -i '/enable underlay/c\enable underlay = yes' /etc/apptainer/apptainer.conf && \
-    sed -i '/max loop devices/c\max loop devices = 0' /etc/apptainer/apptainer.conf && \
-    # Deny setuid in Apptainer
-    sed -i '/allow setuid/c\allow setuid = no' /etc/apptainer/apptainer.conf
