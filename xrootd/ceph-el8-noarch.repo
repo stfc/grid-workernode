@@ -1,0 +1,9 @@
+[ceph-el8-noarch]
+name=ceph-el8-noarch
+baseurl=    http://mirrors.gridpp.rl.ac.uk/live/ceph-el8-noarch/RPMS.pacific/
+
+metadata_expire=7d
+enabled=1
+gpgcheck=0
+priority=40
+skip_if_unavailable=0
