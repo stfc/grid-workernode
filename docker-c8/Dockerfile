@@ -28,7 +28,7 @@ RUN dnf -y install \
     rm -rf /var/cache/dnf
 
 # CVMFS (for SUM tests only; install before adding other repos to ensure we have the latest version)
-RUN dnf -y install https://ecsft.cern.ch/dist/cvmfs/cvmfs-release/cvmfs-release-latest.noarch.rpm \
+RUN dnf -y install https://cvmrepo.web.cern.ch/cvmrepo/yum/cvmfs-release-latest.noarch.rpm \
                    https://download.opensuse.org/repositories/home:/cvmfs:/contrib-egi/AlmaLinux_8/noarch/cvmfs-config-egi-2.7-1.8.obs.el8.noarch.rpm && \
     # Install CVMFS
     dnf -y install cvmfs && \
