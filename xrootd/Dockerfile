@@ -1,12 +1,13 @@
-FROM rockylinux:8
+FROM rockylinux:9
 
 # Add labels and arguments
-ARG XROOTD_VERSION=5.7.3-4
-ARG XRDCEPH_VERSION=5.7.3-4
-ARG CEPH_VERSION=16.2.15-0
+ARG XROOTD_VERSION=6.1.0-98
+ARG XRDCEPH_VERSION=6.1.0-98
+ARG CEPH_VERSION=19.2.4-2
+ARG CMSTFC_VERSION=2.0.2-1
 
 ARG ARCH=x86_64
-ARG DISTRO=el8
+ARG DISTRO=el9
 LABEL xrootd-ver=$XROOTD_VERSION
 LABEL xrdceph-ver=$XRDCEPH_VERSION
 LABEL ceph-ver=$CEPH_VERSION
@@ -54,8 +55,9 @@ RUN dnf -y install python3-dnf-plugin-versionlock && \
                    xrootd-selinux-${XROOTD_VERSION}.${DISTRO}.noarch \
                    xrootd-server-${XROOTD_VERSION}.${DISTRO}.${ARCH} \
                    xrootd-server-libs-${XROOTD_VERSION}.${DISTRO}.${ARCH} \
-                   xrootd-ceph-buffered-${XRDCEPH_VERSION}.${DISTRO}.${ARCH} \
+                   xrootd-ceph-${XRDCEPH_VERSION}.${DISTRO}.${ARCH} \
                    xrootd-voms-${XROOTD_VERSION}.${DISTRO}.${ARCH} \
+                   xrootd-cmstfc-${CMSTFC_VERSION}.${DISTRO}.${ARCH} \
                    xrootd-scitokens-${XROOTD_VERSION}.${DISTRO}.${ARCH} && \
     # For debugging purposes, show the versionlock list
     dnf -y versionlock list
@@ -68,21 +70,20 @@ RUN dnf -y install ceph \
                     rm -rf /var/cache/dnf
 
 # Install XROOTD
-RUN dnf -y install xrootd-ceph-buffered \
+RUN dnf -y install xrootd-ceph \
                    xrootd-client \
                    xrootd-client-libs \
                    xrootd-libs \
                    xrootd-server \
                    xrootd-server-libs \
                    xrootd-voms \
+                   xrootd-cmstfc \
                    xrootd-scitokens \
                    jemalloc && \
                    # Clean up cache to keep layer size small
                    dnf clean all && \
                    rm -rf /var/cache/dnf
 
-# For N2N mapping
-RUN dnf -y install http://repos.gridpp.rl.ac.uk/yum/xrootd-cmstfc/${DISTRO}/xrootd-cmstfc-1.5.2-6.osgroup.${DISTRO}.${ARCH}.rpm
 
 # Required for health-check scripts
 RUN dnf -y install openssl && \

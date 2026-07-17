@@ -1,0 +1,9 @@
+[rocky-9-crb]
+name=rocky-9-crb
+baseurl=    http://mirrors.gridpp.rl.ac.uk/snapshot/current/rocky-9-x86_64/RPMS.crb/
+
+metadata_expire=7d
+enabled=1
+gpgcheck=0
+priority=50
+skip_if_unavailable=0
