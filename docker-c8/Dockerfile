@@ -1,4 +1,4 @@
-FROM rockylinux:8
+FROM rockylinux/rockylinux:8
 
 # Add labels
 LABEL org.opencontainers.image.source=https://github.com/stfc/grid-workernode
