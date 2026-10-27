@@ -1,4 +1,4 @@
-FROM rockylinux:9
+FROM rockylinux/rockylinux:9
 
 # Add labels and arguments
 ARG XROOTD_VERSION=6.1.0-98
